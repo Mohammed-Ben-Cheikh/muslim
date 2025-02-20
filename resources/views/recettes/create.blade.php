@@ -77,7 +77,7 @@
             <div>
                 <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
                 <input type="file" id="image" name="image"
-                    class="px-3 py-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 rounded-lg file:border file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100 @error('image') border-red-500 @enderror">
+                    class="w-full px-3 py-2 border rounded-lg file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100 @error('image') border-red-500 @enderror">
                 @error('image')
                     <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                 @enderror
