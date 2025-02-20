@@ -7,6 +7,25 @@
             </a>
         </div>
 
+        <!-- Système de filtrage -->
+        <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+            <form method="GET" action="/recettes" class="flex flex-wrap gap-4">
+                <div class="flex-1">
+                    <select name="category" class="w-full px-3 py-2 border rounded-lg file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100">
+                        <option value="">Toutes les catégories</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category }}" {{ request('category') == $category ? 'selected' : '' }}>
+                                {{ $category }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Filtrer
+                </button>
+            </form>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($recettes as $recette)
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">

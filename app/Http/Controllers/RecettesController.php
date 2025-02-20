@@ -9,10 +9,22 @@ use Illuminate\Http\Request;
 class RecettesController
 {
     protected $table = 'recettes';
-    public function index()
+    public function index(Request $request)
     {
-        $recettes = Recette::all();
-        return view('recettes', ['recettes' => $recettes]);
+        $query = Recette::query();
+
+        // Filtre par catégorie
+        if ($request->has('category') && !empty($request->category)) {
+            $query->where('category', $request->category);
+        }
+
+        $recettes = $query->get();
+        $categories = Recette::distinct('category')->pluck('category');
+
+        return view('recettes', [
+            'recettes' => $recettes,
+            'categories' => $categories
+        ]);
     }
 
     public function create()
