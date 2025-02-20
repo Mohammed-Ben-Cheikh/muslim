@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Recette;
+use App\Models\Commentaire;
 use Illuminate\Http\Request;
 
 class RecettesController
 {
+    protected $table = 'recettes';
     public function index()
     {
-        return view('recettes');
+        $recettes = Recette::all();
+        return view('recettes', ['recettes' => $recettes]);
     }
 
     public function create()
@@ -21,9 +24,9 @@ class RecettesController
     {
         $validated = $request->validate([
             'title' => 'required|max:255',
-            'category' => 'required',
-            'ingredients' => 'required',
-            'instructions' => 'required',
+            'category' => 'required|max:255',
+            'ingredients' => 'required|max:255',
+            'instructions' => 'required|max:255',
             'preparation_time' => 'required|integer',
             'cooking_time' => 'required|integer',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
@@ -41,7 +44,8 @@ class RecettesController
 
     public function get($id)
     {
+        $com = Commentaire::where('recette_id', $id)->get();
         $recette = Recette::findOrFail($id);
-        return view('recette', compact('recette'));
+        return view('recette', compact('recette','com'));
     }
 }

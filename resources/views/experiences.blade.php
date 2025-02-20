@@ -18,7 +18,7 @@
                         <h2 class="text-xl font-semibold mb-2">{{ $experience->title }}</h2>
                         <p class="text-gray-600 mb-4">{{ Str::limit($experience->description, 150) }}</p>
                         <div class="flex justify-between items-center">
-                            <span class="text-gray-500">{{ $experience->date->format('d/m/Y') }}</span>
+                            <span class="text-gray-500">{{ $experience->date }}</span>
                             <a href="/experiences/{{ $experience->id }}" class="text-blue-500 hover:text-blue-700">
                                 Voir plus
                             </a>

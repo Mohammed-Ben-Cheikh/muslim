@@ -20,6 +20,10 @@ class Recette extends Model
     ];
 
     protected $casts = [
-        
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(Commentaire::class, 'recette_id');
+    }
 }

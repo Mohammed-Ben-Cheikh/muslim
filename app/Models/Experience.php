@@ -17,6 +17,5 @@ class Experience extends Model
     ];
 
     protected $casts = [
-        'date' => 'datetime'
     ];
 }

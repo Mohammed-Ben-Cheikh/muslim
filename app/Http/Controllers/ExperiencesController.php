@@ -24,8 +24,8 @@ class ExperiencesController
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
+            'title' => 'required|max:50',
+            'content' => 'required|max:255',
             'date' => 'required|date',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
