@@ -12,15 +12,12 @@ class RecettesController
     public function index(Request $request)
     {
         $query = Recette::query();
-
         // Filtre par catégorie
         if ($request->has('category') && !empty($request->category)) {
             $query->where('category', $request->category);
         }
-
         $recettes = $query->paginate(6);
         $categories = Recette::distinct('category')->pluck('category');
-
         return view('recettes', [
             'recettes' => $recettes,
             'categories' => $categories
