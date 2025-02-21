@@ -44,6 +44,9 @@ class ExperiencesController
 
     public function get($id)
     {
+        if (!is_numeric($id) || !ctype_digit((string)$id)) {
+            abort(404);
+        }
         $experience = Experience::findOrFail($id);
         return view('experience', compact('experience'));
     }

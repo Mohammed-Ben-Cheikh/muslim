@@ -18,7 +18,7 @@ class RecettesController
             $query->where('category', $request->category);
         }
 
-        $recettes = $query->get();
+        $recettes = $query->paginate(6);
         $categories = Recette::distinct('category')->pluck('category');
 
         return view('recettes', [
@@ -56,8 +56,12 @@ class RecettesController
 
     public function get($id)
     {
-        $com = Commentaire::where('recette_id', $id)->get();
-        $recette = Recette::findOrFail($id);
-        return view('recette', compact('recette','com'));
+        // Vérifier si l'ID est un nombre entier
+        if (!is_numeric($id) || !ctype_digit((string)$id)) {
+            abort(404);
+        }
+        $com = Commentaire::where('recette_id', (int)$id)->get();
+        $recette = Recette::findOrFail((int)$id);
+        return view('recette', compact('recette', 'com'));
     }
 }

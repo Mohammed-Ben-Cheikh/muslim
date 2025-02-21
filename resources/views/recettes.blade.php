@@ -26,7 +26,7 @@
             </form>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-5">
             @foreach($recettes as $recette)
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
                     @if($recette->image)
@@ -45,5 +45,6 @@
                 </div>
             @endforeach
         </div>
+        {{ $recettes->links() }}
     </div>
 </x-layout>
