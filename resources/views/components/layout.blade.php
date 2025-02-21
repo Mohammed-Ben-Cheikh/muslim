@@ -7,6 +7,7 @@
     <title>Ramadan Community</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://muslim.test/js/tailwindcss.js"></script>
+    <link rel="stylesheet" href="/css/success-message.css">
     <style>
         .ramadan-pattern {
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5l5 10 10 5-10 5-5 10-5-10-10-5 10-5z' fill='%23166534' fill-opacity='0.05'/%3E%3C/svg%3E");
@@ -19,6 +20,40 @@
 </head>
 
 <body class="bg-gray-50 ramadan-pattern">
+    <div id="message-container" class="fixed top-4 right-4 z-50"></div>
+    
+    @if (session()->has('success'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showMessage("{{ session('success') }}");
+        });
+    </script>
+    @endif
+
+    <script>
+        class MessageManager {
+            static show(message, type = 'success') {
+                const container = document.getElementById('message-container');
+                const messageEl = document.createElement('div');
+                messageEl.className = `message-alert message-${type}`;
+                messageEl.innerHTML = `
+                    <span class="message-icon">✓</span>
+                    <span class="message-text">${message}</span>
+                `;
+                
+                container.appendChild(messageEl);
+                
+                setTimeout(() => {
+                    messageEl.classList.add('fade-out');
+                    setTimeout(() => messageEl.remove(), 300);
+                }, 3000);
+            }
+        }
+        
+        // Rendre disponible globalement
+        window.showMessage = MessageManager.show;
+    </script>
+
     <!-- Navigation avec style Ramadan -->
     <nav class="bg-gradient-to-r from-green-700 to-green-900 text-white shadow-lg">
         <div class="container mx-auto px-4 py-3">
